@@ -22,7 +22,7 @@
     }
   },
   "auth": {
-    "myverdeapp35e2bcaf": {
+    "myverdeapp2d2acabf": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -30,14 +30,10 @@
       "frontendAuthConfig": {
         "socialProviders": [],
         "usernameAttributes": [
-          "EMAIL",
-          "PHONE_NUMBER"
+          "EMAIL"
         ],
         "signupAttributes": [
-          "EMAIL",
-          "FAMILY_NAME",
-          "LOCALE",
-          "NAME"
+          "EMAIL"
         ],
         "passwordProtectionSettings": {
           "passwordPolicyMinLength": 8,

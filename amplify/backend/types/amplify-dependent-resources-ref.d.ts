@@ -7,11 +7,9 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "auth": {
-        "myverdeapp35e2bcaf": {
+        "myverdeapp2d2acabf": {
             "IdentityPoolId": "string",
             "IdentityPoolName": "string",
-            "HostedUIDomain": "string",
-            "OAuthMetadata": "string",
             "UserPoolId": "string",
             "UserPoolArn": "string",
             "UserPoolName": "string",

@@ -1,10 +1,10 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "myverdeapp35e2bcaf_identitypool_35e2bcaf",
+    "identityPoolName": "myverdeapp2d2acabf_identitypool_2d2acabf",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "myverd35e2bcaf",
-    "userPoolName": "myverdeapp35e2bcaf_userpool_35e2bcaf",
+    "resourceNameTruncated": "myverd2d2acabf",
+    "userPoolName": "myverdeapp2d2acabf_userpool_2d2acabf",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -20,10 +20,7 @@
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
     "requiredAttributes": [
-      "email",
-      "family_name",
-      "locale",
-      "name"
+      "email"
     ],
     "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
@@ -34,21 +31,15 @@
     "userpoolClientReadAttributes": [
       "email"
     ],
-    "userpoolClientLambdaRole": "myverd35e2bcaf_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "myverd2d2acabf_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "35e2bcaf",
-    "resourceName": "myverdeapp35e2bcaf",
+    "sharedId": "2d2acabf",
+    "resourceName": "myverdeapp2d2acabf",
     "authSelections": "identityPoolAndUserPool",
-    "useDefault": "defaultSocial",
-    "hostedUI": true,
+    "useDefault": "default",
     "usernameAttributes": [
-      "email, phone_number"
+      "email"
     ],
-    "triggers": {},
-    "hostedUIDomainName": "myverdeapp35e2bcaf-35e2bcaf",
-    "authProvidersUserPool": [],
-    "hostedUIProviderMeta": "[]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"landmarks://\"],\"LogoutURLs\":[\"landmarks://\"]}",
     "userPoolGroupList": [],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,
