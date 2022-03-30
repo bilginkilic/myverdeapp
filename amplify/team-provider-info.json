@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-myverdeapp-staging-142712-authRole",
+      "UnauthRoleArn": "arn:aws:iam::398012631463:role/amplify-myverdeapp-staging-142712-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::398012631463:role/amplify-myverdeapp-staging-142712-authRole",
+      "Region": "eu-west-3",
+      "DeploymentBucketName": "amplify-myverdeapp-staging-142712-deployment",
+      "UnauthRoleName": "amplify-myverdeapp-staging-142712-unauthRole",
+      "StackName": "amplify-myverdeapp-staging-142712",
+      "StackId": "arn:aws:cloudformation:eu-west-3:398012631463:stack/amplify-myverdeapp-staging-142712/2894deb0-aea3-11ec-a55c-062ef9dfc902",
+      "AmplifyAppId": "d16i83uauhjgzh"
+    },
+    "categories": {
+      "auth": {
+        "myverdeapp35e2bcaf": {}
+      }
+    }
+  }
+}
