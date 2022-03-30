@@ -20,7 +20,7 @@ function App({ signOut, user }) {
      
       <h1>Hello {user.Email}</h1>
     
-      <Tasks />
+       
     <div> 
       <button onClick={signOut}>Sign out</button>
       
