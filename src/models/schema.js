@@ -1,7 +1,7 @@
 export const schema = {
     "models": {
-        "Card": {
-            "name": "Card",
+        "CardPost": {
+            "name": "CardPost",
             "fields": {
                 "id": {
                     "name": "id",
@@ -49,7 +49,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "Cards",
+            "pluralName": "CardPosts",
             "attributes": [
                 {
                     "type": "model",
@@ -205,6 +205,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "isCompleted": {
+                    "name": "isCompleted",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -334,5 +341,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "1cfc888bdc6e630c6cd32ed83ee8355a"
+    "version": "83040b3eab5fe503ce389d86b247f0f9"
 };

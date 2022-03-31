@@ -5,8 +5,8 @@
  **************************************************************************/
 
 import React from "react";
-import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 import { Post } from "../models";
+import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 import { FlexProps } from "@aws-amplify/ui-react";
 export declare type CardCProps = React.PropsWithChildren<Partial<FlexProps> & {
     post?: Post;

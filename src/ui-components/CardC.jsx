@@ -6,18 +6,10 @@
 
 /* eslint-disable */
 import React from "react";
-import {
-  getOverrideProps,
-  useStateMutationAction,
-} from "@aws-amplify/ui-react/internal";
+import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Button, Flex, Image, Rating, Text } from "@aws-amplify/ui-react";
 export default function CardC(props) {
   const { post, overrides, ...rest } = props;
-  const [DollarNineNineUSDChildren, setDollarNineNineUSDChildren] =
-    useStateMutationAction("$99 USD");
-  const buttonOnClick = () => {
-    setDollarNineNineUSDChildren(post?.title);
-  };
   return (
     <Flex
       gap="0"
@@ -37,6 +29,7 @@ export default function CardC(props) {
         objectFit="cover"
         position="relative"
         padding="0px 0px 0px 0px"
+        src={post?.image}
         {...getOverrideProps(overrides, "image")}
       ></Image>
       <Flex
@@ -95,7 +88,7 @@ export default function CardC(props) {
             position="relative"
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
-            children={post?.title}
+            children={post?.description}
             {...getOverrideProps(overrides, "Information about this product")}
           ></Text>
         </Flex>
@@ -127,7 +120,7 @@ export default function CardC(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children={DollarNineNineUSDChildren}
+          children="$99 USD"
           {...getOverrideProps(overrides, "$99 USD")}
         ></Text>
         <Button
@@ -148,9 +141,6 @@ export default function CardC(props) {
           isDisabled={false}
           variation="primary"
           children="Primary Button"
-          onClick={() => {
-            buttonOnClick();
-          }}
           {...getOverrideProps(overrides, "Button")}
         ></Button>
       </Flex>

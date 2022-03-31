@@ -1,4 +1,4 @@
-type Card @model @auth(rules: [{allow: public}]) {
+type CardPost @model @auth(rules: [{allow: public}]) {
   id: ID!
   title: String
   description: String
@@ -19,6 +19,7 @@ type Post @model @auth(rules: [{allow: public}]) {
   comments: [Comment] @hasMany(indexName: "byPost", fields: ["id"])
   description: String
   image: AWSURL
+  isCompleted: Boolean
 }
 
 type Comment @model @auth(rules: [{allow: public}]) {
