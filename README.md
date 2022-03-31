@@ -1,3 +1,13 @@
+# This is a challenge project. To save water!
+In 21 days, 21 task is ready to be taken in order to get a habit and understanding about how small changes
+can affect to save our planet. 
+
+User register system is based on AWS Cognito
+User db system is based on DynomoDB
+All deployments are shipped by using Amplify Build from Github to PROD environment.
+
+Hope you like it. It will be ready in mid of April.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
