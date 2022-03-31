@@ -4,6 +4,10 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 
 
+type CardMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
 type BlogMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
@@ -16,10 +20,22 @@ type CommentMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
+export declare class Card {
+  readonly id: string;
+  readonly title?: string | null;
+  readonly description?: string | null;
+  readonly image?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<Card, CardMetaData>);
+  static copyOf(source: Card, mutator: (draft: MutableModel<Card, CardMetaData>) => MutableModel<Card, CardMetaData> | void): Card;
+}
+
 export declare class Blog {
   readonly id: string;
   readonly name: string;
   readonly posts?: (Post | null)[] | null;
+  readonly email?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Blog, BlogMetaData>);
@@ -31,6 +47,8 @@ export declare class Post {
   readonly title: string;
   readonly blogID: string;
   readonly comments?: (Comment | null)[] | null;
+  readonly description?: string | null;
+  readonly image?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Post, PostMetaData>);

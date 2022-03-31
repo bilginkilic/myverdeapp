@@ -1,20 +1,29 @@
+type Card @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String
+  description: String
+  image: AWSURL
+}
 
-  type Blog @model @auth(rules: [{allow: public}]) {
-    id: ID!
-    name: String!
-    posts: [Post] @hasMany(indexName: "byBlog", fields: ["id"])
-  }
-  
-  type Post @model @auth(rules: [{allow: public}]) {
-    id: ID!
-    title: String!
-    blogID: ID! @index(name: "byBlog")
-    comments: [Comment] @hasMany(indexName: "byPost", fields: ["id"])
-  }
-  
-  type Comment @model @auth(rules: [{allow: public}]) {
-    id: ID!
-    postID: ID! @index(name: "byPost")
-    content: String!
-  }
-  
+type Blog @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+  posts: [Post] @hasMany(indexName: "byBlog", fields: ["id"])
+  email: AWSEmail
+}
+
+type Post @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String!
+  blogID: ID! @index(name: "byBlog")
+  comments: [Comment] @hasMany(indexName: "byPost", fields: ["id"])
+  description: String
+  image: AWSURL
+}
+
+type Comment @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  postID: ID! @index(name: "byPost")
+  content: String!
+}
+ 

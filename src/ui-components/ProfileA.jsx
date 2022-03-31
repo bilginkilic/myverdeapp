@@ -6,11 +6,21 @@
 
 /* eslint-disable */
 import React from "react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
+import {
+  getOverrideProps,
+  useAuth,
+  useDataStoreCreateAction,
+} from "@aws-amplify/ui-react/internal";
+import { Blog } from "../models";
 import { Button, Flex, Image, Text } from "@aws-amplify/ui-react";
 import MyIcon from "./MyIcon";
 export default function ProfileA(props) {
   const { overrides, ...rest } = props;
+  const authAttributes = useAuth().user?.attributes ?? {};
+  const buttonOnClick = useDataStoreCreateAction({
+    fields: { name: "I take the action", email: authAttributes["email"] },
+    model: Blog,
+  });
   return (
     <Flex
       gap="24px"
@@ -30,6 +40,7 @@ export default function ProfileA(props) {
         position="relative"
         borderRadius="160px"
         padding="0px 0px 0px 0px"
+        src="https://myverdeapp-storage-87d83883142712-staging.s3.eu-west-3.amazonaws.com/deniz1.jpg"
         {...getOverrideProps(overrides, "image")}
       ></Image>
       <Flex
@@ -55,7 +66,7 @@ export default function ProfileA(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children="Melinda Marcus"
+          children="21 day water saving challenge"
           {...getOverrideProps(overrides, "Melinda Marcus")}
         ></Text>
         <Text
@@ -73,7 +84,7 @@ export default function ProfileA(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children="Design Engineer at Cloth Studios"
+          children="Everyday come and complete your task card"
           {...getOverrideProps(overrides, "Design Engineer at Cloth Studios")}
         ></Text>
       </Flex>
@@ -112,7 +123,7 @@ export default function ProfileA(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children="99 Followers"
+          children="21 online"
           {...getOverrideProps(overrides, "99 Followers")}
         ></Text>
       </Flex>
@@ -134,6 +145,9 @@ export default function ProfileA(props) {
         isDisabled={false}
         variation="primary"
         children="View Profile"
+        onClick={() => {
+          buttonOnClick();
+        }}
         {...getOverrideProps(overrides, "Button")}
       ></Button>
     </Flex>

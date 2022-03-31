@@ -1,0 +1,11 @@
+{
+  "resourceName": "s3myverdeappstorage87d83883",
+  "bucketName": "myverdeapp-storage-87d83883",
+  "policyUUID": "db51979a",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "READ",
+    "CREATE_AND_UPDATE"
+  ]
+}

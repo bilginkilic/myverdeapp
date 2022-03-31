@@ -1,5 +1,6 @@
 {
   "AppSyncApiName": "myverdeapp",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthModeLastUpdated": "2022-03-30T12:02:23.406Z"
 }
