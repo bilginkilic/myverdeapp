@@ -1,87 +1,195 @@
 import React, { Component } from "react";
 import { DataStore } from "@aws-amplify/datastore";
-import { Blog } from "../models";
-import { Auth } from 'aws-amplify';
-import { 
-    MyTask,
-    ProfileA 
-  } from '../ui-components';
+import { Blog, Post, Card } from "../models";
+import { Auth } from "aws-amplify";
+import { MyTask    } from "../ui-components";
+import { Alert } from "@aws-amplify/ui-react";
+import TakeChallenge from "./TakeChallenge";
+import { Collection } from '@aws-amplify/ui-react';
 class WelcomePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        email:'',
+      email: "",
       blogTitle: "",
       hasBlog: false,
-      isLoading:true,
+      isLoading: true,
+      isPostLoading:true,
       welcomeMessage: "Ready to take action?",
-
+      tokens : props.tokens,
+      blogid:'',
+      post:[]
     };
   }
 
   componentDidMount() {
-
     const fetchUser = async () => {
-        console.log(1)
-        Auth.currentUserInfo().then(result => {
-         
-            if (result) {
-                const emailx =  result.attributes.email
-                this.setState({
-                    email : emailx,
-                    isLoading: false,
-                    // blogTitle: '',
-                    // hasBlog: false,
-                    // welcomeMessage: "Please wait..."
-                });
-                fetchUserBlog();
-            }
-        }) ;
-
-    
-    };
-  
-    
-    const fetchUserBlog = async () => {
-        console.log(2)
-            const listBlog = ( await  DataStore.query(Blog)).filter(
-                (c) => c.email ===  this.state.email //"blgnklc@gmail.com"
-              );
-              console.log(listBlog);
-         
-              if (listBlog.length > 0) {
-                this.setState({email:this.state.email});
-                this.setState({ blogTitle: listBlog[0].title });
-                this.setState({ hasBlog: true });
-                this.setState( { welcomeMessage: "You are in the challenge. Good Luck"});
-              }else{
-                this.setState({ hasBlog: false });
-                this.setState( { welcomeMessage: "You do not have a challenge now. Take the challenge?"});
-              }
+      console.log(1);
+      Auth.currentUserInfo().then((result) => {
+        if (result) {
+          const emailx = result.attributes.email;
+          this.setState({
+            email: emailx,
+            isLoading: false,
+          });
+           fetchUserBlog().then(()=>{
+              fetchPost();  
            
+          })
+          }
+        }
+      );
+    };
+
+    const fetchUserBlog = async () => {
+     
+      const listBlog = (await DataStore.query(Blog)).filter(
+        (c) => c.email === this.state.email //"blgnklc@gmail.com"
+      );
  
 
-    
+      if (listBlog.length > 0) {
+        this.setState({ email: this.state.email });
+        this.setState({ blogTitle: listBlog[0].title,
+        
+           blogid : listBlog[0].id
+        
+        });
+        this.setState({ hasBlog: true });
+        this.setState({
+          welcomeMessage: "You are in the challenge. Good Luck",
+        });
+        
+         
+      } else {
+        this.setState({ hasBlog: false });
+        this.setState({
+          welcomeMessage:
+            "You do not have a challenge now. Take the challenge?",
+        });
+      }
     };
-    fetchUser();
-   
-    console.log(this.state);
-  }
 
-  // componentShouldUpdate() {}
+    const fetchPost = async () => {
+      const posts =   (await DataStore.query(Post)).filter(
+        (c) => c.blogID ===  this.state.blogid
+      );
+      this.setState({ post: posts });
+      this.setState({isPostLoading:false});
+      console.log(this.state);
+    };
+
+  
+
+    fetchUser();
+
+    //console.log(this.state);
+  }
 
   componentWillUnmount() {}
 
-  //state = {  }
-  render() { 
-    return <div>   
+  render() {
+    const saveBlog = async () => {
+     
+
+      await DataStore.save(
+        new Blog({
+          name: "My first challenge",
+          posts: [],
+          email: this.state.email,
+        })
+      );
+      const listBlog = (await DataStore.query(Blog)).filter(
+        (c) => c.email === this.state.email //"blgnklc@gmail.com"
+      );
+ 
+
+      if (listBlog.length > 0) {
+        this.setState({ email: this.state.email });
+        this.setState({ blogTitle: listBlog[0].title,
+        
+           blogid : listBlog[0].id
+        
+        });
+      }
+      addCardsToBlog();
+     
+    };
+
+    const addCardsToBlog = async () => {
+      console.log("addCardsToBlog")
+      const models = await DataStore.query(Card);
+ 
+      for (let i = 0; i < models.length; i++) {
+         
+          await DataStore.save(
+            new Post({ 
+ 
+              title: models[i].title,
+              blogID: this.state.blogid,
+              comments: [],
+              description: models[i].description,
+              image:  models[i].image,
+              isCompleted: false }
+            )
+        );
+       
+
+       
+      }
+
+      const posts =  (await DataStore.query(Post)).filter(
+        (c) => c.blogID ===  this.state.blogid
+      );
+      this.setState({ post: posts });
+
+    };
+
+    const   takeChallenge = async () => {
+      console.log("takeChallenge")
+      await saveBlog();
+      this.setState({ hasBlog: true });
+      this.setState({ welcomeMessage: "You are in the challenge. Good Luck" });
+    };
+
+    return (
+      <div>
         <div>Welcome {this.state.email}</div>
         <div>{this.state.welcomeMessage}</div>
-        {this.state.isLoading ? <div>Loading...</div> :
-          !this.state.hasBlog   ? 
-     <div> <ProfileA /> </div> : <div> <MyTask/> </div> }
-      </div> 
-    ;
+        {this.state.isLoading ? (
+          <div>Loading...</div>
+        ) : !this.state.hasBlog ? (
+          <div>
+           
+            <div>
+              <h1>Take challenge</h1>
+              <img src="https://myverdeapp-storage-87d83883142712-staging.s3.eu-west-3.amazonaws.com/deniz1.jpg" />
+              <p>
+                Please click the button to receive your tasks which will take 21
+                days.
+              </p>
+              <button onClick={takeChallenge}>Take challenge</button>
+            </div> 
+          </div>
+        ) : (
+          <div>
+            { !this.state.isPostLoading ?  
+              <Collection type="list" items={this.state.post}   isPaginated itemsPerPage={1}>
+  {(item) => (
+    <div >
+      <TakeChallenge tokens={this.state.tokens } post={item} />  
+      </div>
+   
+  )}
+</Collection>
+
+         
+           : <div>loading</div> }
+            
+          </div>
+        )}
+      </div>
+    );
   }
 }
 

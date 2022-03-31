@@ -7,15 +7,20 @@ import awsExports from "./aws-exports";
 import React, { useState, useEffect } from "react";
 
 import WelcomePage from "./components/WelcomePage";
+import {
+ 
+  useTheme
+} from '@aws-amplify/ui-react';
 
 Amplify.configure(awsExports);
 
 function App({ signOut, user }) {
+  const { tokens } = useTheme();
   return (
     <div>
       
       <div>
-        <WelcomePage   />
+        <WelcomePage tokens={tokens}   />
       </div>
 
       <div>
