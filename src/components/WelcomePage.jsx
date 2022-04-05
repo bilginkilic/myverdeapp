@@ -17,6 +17,7 @@ import {
   Text,
   Button,
 } from "@aws-amplify/ui-react";
+import CardModern from "./CardModern";
 class WelcomePage extends Component {
    state = {
     email: "",
@@ -201,7 +202,9 @@ to apply updates to the item’s fields rather than mutating the instance direct
               <Carousel show={3.5} slide={3} swiping={true}>
                {   this.state?.post?.map((item, index) => 
              
-             <TakeChallenge key={index}  post={item} />)
+            // <TakeChallenge key={index}  post={item} />
+             <CardModern  key={index}  post={item} />
+             )
             }
  
              </Carousel>
