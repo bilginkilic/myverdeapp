@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { DataStore } from "@aws-amplify/datastore";
- 
- 
-import { Post } from '../models';
+
+import { Post } from "../models";
 import {
   Card,
   Image,
@@ -11,89 +10,90 @@ import {
   Flex,
   Badge,
   Text,
-  Button 
- 
+  Button,
 } from "@aws-amplify/ui-react";
- 
+
 class TakeChallenge extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tokens: props.tokens,
-      post: props.post,
-      isCompleted: props.post.isCompleted,
-      key:props.key
-    };
-  }
+  state = {
+    isCompleted: this.props.post.isCompleted,
+    post: this.props.post
+  };
+   
+  // constructor(props) {
+  //   super(props);
+  //    this.setState({
 
-  componentDidMount() {}
+  //   post:props?.post,
+  //   isCompleted: props.post?.isCompleted,
+  //   key:props?.key
+  // });
 
-  componentWillUnmount() {}
-  render() {
-   const  buttonClicked = async ()  =>  {
-       await   update();
-      this.setState({ isCompleted: true });
-    };
+  // hadleButtonClick = () => {
+  //      this.setState({isCompleted:true});
+  //       console.log("ses veri",this.props.keyx ,this.props.post.isCompleted);
 
-    const update = async ()  => {
-      /* Models in DataStore are immutable. To update a record you must use the copyOf function
+  // }
+
+  hadleButtonClickx=  ()=> {
+   
+     console.log("ses veri", this.props.key, this.state);
+  };
+
+  hadleButtonClick =  ()=> {
+    this.update();
+    this.setState({ isCompleted: true });
+    //console.log("ses veri", this.props.keyx, this.state.isCompleted);
+  };
+
+  update = async () => {
+    /* Models in DataStore are immutable. To update a record you must use the copyOf function
  to apply updates to the item’s fields rather than mutating the instance directly */
-     await    DataStore.save(
-        Post.copyOf(this.state.post, item => {
-          // Update the values on {item} variable to update DataStore entry
-          item.isCompleted = true;
-        })
+    await DataStore.save(
+      Post.copyOf(this.state.post, (item) => {
+        // Update the values on {item} variable to update DataStore entry
+        item.isCompleted = true;
+      })
+    );
+    console.log(this.state.post);
+  };
 
-        
-      );console.log(this.state.post);
-    };
+  // componentDidMount() {
 
+  // }
+
+  // componentWillUnmount() {}
+  render() {
     return (
-          <Card key={this.state.key} padding="1rem"> 
-        <Heading level={4}>{this.state.post.title}</Heading>
-        <Text>{this.state.post.description}</Text> </Card>
-    //   <View
-    //     backgroundColor={this.state.tokens.colors.background.secondary}
-    //     padding={this.state.tokens.space.medium}
-    //     key={this.state.key}
-    //   >
-    //     <Card>
-    //       <Flex direction="row" alignItems="flex-start">
-    //         <Image
-    //           alt="Road to milford sound"
-    //           src={this.state.post.image}
-    //           width="33%"
-    //         />
-    //         <Flex
-    //           direction="column"
-    //           alignItems="flex-start"
-    //           gap={this.state.tokens.space.xs}
-    //         >
-    //           <Flex>
-    //             <Badge
-    //               size="small"
-    //               variation={this.state.isCompleted ? "success" : "info"}
-    //             >
-    //               {this.state.isCompleted ? "Congrats!" : "Pending"}
-    //             </Badge>
-    //           </Flex>
-
-    //           <Heading level={3}>{this.state.post.title}</Heading>
-
-    //           <Text as="span">{this.state.post.description}</Text>
-    //           {this.state.isCompleted ? (
-    //             <Button variation="primary" disabled>
-    //               Completed
-    //             </Button>
-    //           ) : (
-    //             <Button variation="primary" onClick={buttonClicked}>
-    //               Complete
-    //             </Button>
-    //           )}
-    //         </Flex>
-    //       </Flex>
-    //     </Card>
-    //   </View>
+      <Card key={this.props.key} padding="1rem">
+        <Heading level={4}>{this.props.post.title}</Heading>
+        <Image
+          src={this.props.post.image}
+          srcSet=""
+          sizes=""
+          alt="Task"
+          objectFit="fill"
+          objectPosition="initial"
+          backgroundColor="initial"
+          borderRadius="initial"
+          border="initial"
+          boxShadow="initial"
+          color="initial"
+          height="50%"
+          maxHeight="initial"
+          maxWidth="initial"
+          minHeight="initial"
+          minWidth="initial"
+          opacity="100%"
+          padding="0"
+          width="50%"
+          onClick={() => alert("📸 Say cheese!")}
+        />
+        <Text>{this.props.post.description}</Text>
+        {
+          this.state.isCompleted ?     <button  onClick={this.hadleButtonClickx}  >Completed</button>: 
+       <button onClick={this.hadleButtonClick} >Complete</button> 
+       }
+      </Card>
     );
   }
 }
