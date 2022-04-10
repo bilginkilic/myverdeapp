@@ -31,7 +31,7 @@ const Cell = ({ toggle, name, height, description, css, maximized }) => (
           <div
             className="divx"
             onClick={() => {
-              alert('sex')
+              alert('completed')
             }}>
             complete
           </div>
