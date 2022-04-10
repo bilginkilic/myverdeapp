@@ -11,16 +11,18 @@ import {
  
   useTheme
 } from '@aws-amplify/ui-react';
+import CardList from "./components/CardList";
 
 Amplify.configure(awsExports);
-
+//   <WelcomePage tokens={tokens}   />
 function App({ signOut, user }) {
   const { tokens } = useTheme();
   return (
     <div>
       
       <div>
-        <WelcomePage tokens={tokens}   />
+       <CardList/>
+     
       </div>
 
       <div>
