@@ -55,9 +55,7 @@ const Cell = ({
           <div
             className="divx"
             onClick={() => {
-              if (!altdata.post.isCompleted && altdata.post.isCompleted ==='true') {
-                alert("You have already completed this task!");
-              } else {
+              
                 /* Models in DataStore are immutable. To update a record you must use the copyOf function
              to apply updates to the item’s fields rather than mutating the instance directly */
                 console.log(altdata);
@@ -70,8 +68,8 @@ const Cell = ({
                 completeTask(altdata.order - 1);
 
                 alert("Completed!");
-              }
-              toggle();
+               
+             // toggle();
             }}
           >
             { !altdata.post.isCompleted && altdata.post.isCompleted !=='true' ? "complete" : "completed | Come tomorrow to have your next task"}
@@ -164,8 +162,8 @@ class CardList extends Component {
     console.log("rotunda");
   
 
-    const data = this.state?.data.filter(
-      (d) => d?.name?.toLowerCase().indexOf(this.state.filter) != -1).slice(0,1);
+    const data = this.state?.data.filter((d) => d.post.isCompleted !== true)
+        .sort((a, b) => a.order > b.order ? 1 : -1).slice(0, 1);
 
     //   <Header
     //   {...this.state}
