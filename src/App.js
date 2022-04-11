@@ -23,7 +23,7 @@ Amplify.configure(awsExports);
 function App({ signOut, user }) {
   const { tokens } = useTheme();
   return (
-    <div class="contentmain">
+    <div className="contentmain">
       <div>
         <WelcomePage tokens={tokens} />
       </div>
