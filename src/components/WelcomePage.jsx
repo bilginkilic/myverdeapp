@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import { DataStore } from "@aws-amplify/datastore";
 import { Blog, Post, CardPost } from "../models";
 import { Auth } from "aws-amplify";
+import data from "./data";
 import { MyTask } from "../ui-components";
 import { Alert } from "@aws-amplify/ui-react";
 import TakeChallenge from "./TakeChallenge";
 import { Collection } from "@aws-amplify/ui-react";
-import { Carousel } from '@trendyol-js/react-carousel';
+import { Carousel } from "@trendyol-js/react-carousel";
 import {
   Card,
   Image,
@@ -18,8 +19,9 @@ import {
   Button,
 } from "@aws-amplify/ui-react";
 import CardModern from "./CardModern";
+import CardList from "./CardList";
 class WelcomePage extends Component {
-   state = {
+  state = {
     email: "",
     blogTitle: "",
     hasBlog: false,
@@ -29,14 +31,14 @@ class WelcomePage extends Component {
     tokens: null,
     blogid: "",
     post: [],
+    dataForCardList: [],
   };
   constructor(props) {
     super(props);
-    this.setState({tokens:props.tokens});
+    this.setState({ tokens: props.tokens });
   }
-  
 
-    saveBlog = async () => {
+  saveBlog = async () => {
     await DataStore.save(
       new Blog({
         name: "My first challenge",
@@ -59,7 +61,7 @@ class WelcomePage extends Component {
     this.addCardsToBlog();
   };
 
-    addCardsToBlog = async () => {
+  addCardsToBlog = async () => {
     console.log("addCardsToBlog");
     const models = await DataStore.query(CardPost);
 
@@ -82,27 +84,27 @@ class WelcomePage extends Component {
     this.setState({ post: posts });
   };
 
-    takeChallenge = async () => {
+  takeChallenge = async () => {
     console.log("takeChallenge");
     await this.saveBlog();
     this.setState({ hasBlog: true });
     this.setState({ welcomeMessage: "You are in the challenge. Good Luck" });
   };
 
-    buttonClicked = async (item, index) => {
+  buttonClicked = async (item, index) => {
     await this.updatePost(item);
-     let obj2 = [...this.state.post];
+    let obj2 = [...this.state.post];
     for (const obj of obj2) {
       if (obj.id === index) {
         obj.isCompleted = true;
-    
+
         break;
       }
     }
     this.setState({ post: obj2 });
   };
 
-    updatePost = async (item) => {
+  updatePost = async (item) => {
     /* Models in DataStore are immutable. To update a record you must use the copyOf function
 to apply updates to the item’s fields rather than mutating the instance directly */
 
@@ -111,13 +113,10 @@ to apply updates to the item’s fields rather than mutating the instance direct
         // Update the values on {item} variable to update DataStore entry
         item.isCompleted = true;
       })
-      
-    );  
+    );
   };
-   
 
   componentDidMount() {
-   
     const fetchUser = async () => {
       console.log(1);
       Auth.currentUserInfo().then((result) => {
@@ -127,6 +126,7 @@ to apply updates to the item’s fields rather than mutating the instance direct
             email: emailx,
             isLoading: false,
           });
+          console.log("user yüklendi");
           fetchUserBlog().then(() => {
             fetchPost();
           });
@@ -146,6 +146,7 @@ to apply updates to the item’s fields rather than mutating the instance direct
 
           blogid: listBlog[0].id,
         });
+        console.log("blog yüklendi");
         this.setState({ hasBlog: true });
         this.setState({
           welcomeMessage: "You are in the challenge. Good Luck",
@@ -163,9 +164,32 @@ to apply updates to the item’s fields rather than mutating the instance direct
       const posts = (await DataStore.query(Post)).filter(
         (c) => c.blogID === this.state.blogid
       );
+      console.log(posts);
       this.setState({ post: posts });
+      //
+      if (posts) {
+        let newArray = [];
+      //  let postRaw = { ...posts };//bu obje olur
+   
+        let i = 0;
+        posts.forEach((d) => {
+          let newObj = {
+            name: d.title,
+            description: d.description,
+            image: d.image,
+            css: data[i % 14].css, //  d.css,//because there are 14 variants in data css array
+            height: 200,
+            order:(i+1),
+            post:d
+          };
+          newArray.push(newObj);
+          i++;
+        });
+        this.setState({ dataForCardList: newArray });
+      }
+
       this.setState({ isPostLoading: false });
-      console.log(this.state);
+      console.log("post yüklendi");
     };
 
     fetchUser();
@@ -176,44 +200,34 @@ to apply updates to the item’s fields rather than mutating the instance direct
   componentWillUnmount() {}
 
   render() {
-  
     return (
-      <div>
-        <div>Welcome {this.state.email}</div>
-        <div>{this.state.welcomeMessage}</div>
+      <div  >
+        <div><Heading level={3}>Welcome {this.state.email}</Heading>  </div>
+        <div><Heading level={4}>{this.state.welcomeMessage}</Heading>  </div>
         {this.state.isLoading ? (
-          <div>Loading...</div>
+          <div>Loading challenge...</div>
         ) : !this.state.hasBlog ? (
           <div>
             <div>
-              <h1>Take challenge</h1>
-              <img src="https://myverdeapp-storage-87d83883142712-staging.s3.eu-west-3.amazonaws.com/deniz1.jpg" />
-              <p>
-                Please click the button to receive your tasks which will take 21
-                days.
-              </p>
-              <button onClick={this.takeChallenge}>Take challenge</button>
+            <Text isTruncated={true}> Please click the button to receive your tasks which will take 21
+                days.</Text>
+                <Text isTruncated={true}>
+              <img src="https://previews.dropbox.com/p/thumb/ABewn9DqGBai3eWwk1TdIXuPsfhgnaR3UST-syVuwFquLtt6JdU1QN3ozMHUearMNhPLsTF7Rv-R-TKdfa6dvrsa4ZaDONuLoTpTYbDwsLS8R-u2t7qTrSmMpHeiZYJhcodD2efusNyB2AeDO6Idi85kXZXPqxfp36dz8YDp-ktzR4rS90PEHCjeL5u9jZ59qRa03JzXDR1UhyPYYQhhD53SD6kI6-eP4gjiQyMax_qzlNH2E5lI6zyBX1laFFE1wtyxQaRboKruoSCjOI2hEkKR6zg5qVJzULeCL3bL5IXVl8g6KfwOyL8VAs4rCMKe9psYeIV6Dj7ea2AIahQGZpYUe-B_mlZzpeD-S1fCwzFlMCCkPVA9gHTRTL8dv15CxEk/p.jpeg" />
+              </Text>
+              <Button    variation="primary"
+  size="large" onClick={this.takeChallenge}>
+         Take challenge
+          </Button>
+
+         
             </div>
           </div>
         ) : (
           <div>
-            {!this.state.isPostLoading ? (
-              
-              <Carousel show={3.5} slide={3} swiping={true}>
-               {   this.state?.post?.map((item, index) => 
-             
-            // <TakeChallenge key={index}  post={item} />
-             <CardModern  key={index}  post={item} />
-             )
-            }
- 
-             </Carousel>
-                  
-                   
-                 
-      
+            {!this.state.isPostLoading  ? (
+              <CardList cardListData={this.state.dataForCardList} />
             ) : (
-              <div>loading</div>
+              <div>loading welcomes card</div>
             )}
           </div>
         )}

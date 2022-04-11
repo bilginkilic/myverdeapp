@@ -1,28 +1,32 @@
-import React from 'react'
-import { Button, Input, Dropdown, Menu, Switch } from 'antd'
-import { SmileOutlined } from '@ant-design/icons';
-export default function({
+import React from "react";
+import { Button, Input, Dropdown, Menu, Switch } from "antd";
+import { SmileOutlined } from "@ant-design/icons";
+export default function ({
   shuffle,
   search,
   setColumns,
   setMargin,
   setHeight,
   columns,
-  margin
+  margin 
+   
 }) {
   return (
     <div className="header">
       <Button type="primary" onClick={shuffle}>
         Shuffle
       </Button>
+      
       <Input
         style={{ marginLeft: 15, minWidth: 130, maxWidth: 300 }}
-        suffix={ <SmileOutlined type="search" style={{ color: 'rgba(0,0,0,.25)' }}/>    }
+        suffix={
+          <SmileOutlined type="search" style={{ color: "rgba(0,0,0,.25)" }} />
+        }
         placeholder="input search text"
         onChange={search}
       />
       <Dropdown
-        trigger={['click']}
+        trigger={["click"]}
         overlay={
           <Menu onClick={setColumns}>
             <Menu.Item key="1">1</Menu.Item>
@@ -32,14 +36,15 @@ export default function({
             <Menu.Item key="5">5</Menu.Item>
             <Menu.Item key="6">6</Menu.Item>
           </Menu>
-        }>
+        }
+      >
         <Button style={{ marginLeft: 15, minWidth: 130 }}>
-          {columns} Columns  
+          {columns} Columns
           <SmileOutlined type="down" />
         </Button>
       </Dropdown>
       <Dropdown
-        trigger={['click']}
+        trigger={["click"]}
         overlay={
           <Menu onClick={setMargin}>
             <Menu.Item key="0">0</Menu.Item>
@@ -47,13 +52,15 @@ export default function({
             <Menu.Item key="40">40</Menu.Item>
             <Menu.Item key="70">70</Menu.Item>
           </Menu>
-        }>
+        }
+      >
         <Button style={{ marginLeft: 15, minWidth: 130 }}>
-          {margin} px margin    <SmileOutlined type="down" />
+          {margin} px margin <SmileOutlined type="down" />
         </Button>
       </Dropdown>
       <span style={{ marginLeft: 15 }}>Individual height</span>
       <Switch style={{ marginLeft: 15 }} defaultChecked onChange={setHeight} />
+     
     </div>
-  )
+  );
 }

@@ -24,8 +24,7 @@
     height: 100%;
     overflow: hidden;
     color: #777777;
-    text-transform: uppercase;
-    display: flex;
+    text-transform: uppercase;display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0px 10px 60px -10px rgba(0, 0, 0, 0.2);
@@ -166,3 +165,8 @@
     box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.6);
   }
   
+
+  .contentmain {
+    max-width: 500px;
+    margin: auto;
+  }
