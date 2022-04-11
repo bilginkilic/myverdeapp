@@ -1,4 +1,6 @@
+
 import React, { Component } from "react";
+import { StarOutlined,StarTwoTone } from "@ant-design/icons";
 import { DataStore } from "@aws-amplify/datastore";
 import { Blog, Post, CardPost } from "../models";
 import { Auth } from "aws-amplify";
@@ -9,7 +11,7 @@ import TakeChallenge from "./TakeChallenge";
 import { Collection } from "@aws-amplify/ui-react";
 import { Carousel } from "@trendyol-js/react-carousel";
 import {
-  Card,
+  Card,IconStar,
   Image,
   View,
   Heading,
@@ -203,14 +205,14 @@ to apply updates to the item’s fields rather than mutating the instance direct
     return (
       <div  >
         <div><Heading level={3}>Welcome {this.state.email}</Heading>  </div>
-        <div><Heading level={4}>{this.state.welcomeMessage}</Heading>  </div>
+        <div><Heading level={4}>{this.state.welcomeMessage}<StarTwoTone /></Heading>  </div>
         {this.state.isLoading ? (
           <div>Loading challenge...</div>
         ) : !this.state.hasBlog ? (
           <div>
             <div>
             <Text isTruncated={true}> Please click the button to receive your tasks which will take 21
-                days.</Text>
+                days.<StarOutlined /></Text>
                 <Text isTruncated={true}>
               <img src="https://previews.dropbox.com/p/thumb/ABewn9DqGBai3eWwk1TdIXuPsfhgnaR3UST-syVuwFquLtt6JdU1QN3ozMHUearMNhPLsTF7Rv-R-TKdfa6dvrsa4ZaDONuLoTpTYbDwsLS8R-u2t7qTrSmMpHeiZYJhcodD2efusNyB2AeDO6Idi85kXZXPqxfp36dz8YDp-ktzR4rS90PEHCjeL5u9jZ59qRa03JzXDR1UhyPYYQhhD53SD6kI6-eP4gjiQyMax_qzlNH2E5lI6zyBX1laFFE1wtyxQaRboKruoSCjOI2hEkKR6zg5qVJzULeCL3bL5IXVl8g6KfwOyL8VAs4rCMKe9psYeIV6Dj7ea2AIahQGZpYUe-B_mlZzpeD-S1fCwzFlMCCkPVA9gHTRTL8dv15CxEk/p.jpeg" />
               </Text>
@@ -224,6 +226,7 @@ to apply updates to the item’s fields rather than mutating the instance direct
           </div>
         ) : (
           <div>
+            
             {!this.state.isPostLoading  ? (
               <CardList cardListData={this.state.dataForCardList} />
             ) : (
