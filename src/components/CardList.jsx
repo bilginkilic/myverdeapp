@@ -100,7 +100,7 @@ class CardList extends Component {
     margin: 70,
     filter: "",
     height: true,
-    data: this.getData(this.props.cardListData),
+    data: this.props.cardListData,//his.getData(this.props.cardListData),
     orgData: this.props.cardListData,
     currentOderder: -1,
   };
@@ -132,29 +132,29 @@ class CardList extends Component {
   }
   handleStatusChange() {}
 
-  getData(datax){
-    let datam = datax
-    if(datam === undefined){
-       datam = this.state.orgData;
-       console.log("ORG data")
-    }
+//   getData(datax){
+//     let datam = datax
+//     if(datam === undefined){
+//        datam = this.state.orgData;
+//        console.log("ORG data")
+//     }
    
-datam = lodash.orderBy(datam,"order","asc");
-datam = lodash.filter(datam,(d)=>{ return d.post.isCompleted ===false ; });
+// datam = lodash.orderBy(datam,"order","asc");
+// datam = lodash.filter(datam,(d)=>{ return d.post.isCompleted ===false ; });
 
-  //   datam = datam.filter((d) => d.post.isCompleted !== true)
-  //  .sort((a, b) => a.order > b.order ? 1 : -1);
-    datam = datam.slice(0, 1);
- console.log(datam[0].post.isCompleted);
- console.log(datam[0].post.isCompleted===false);
+//   //   datam = datam.filter((d) => d.post.isCompleted !== true)
+//   //  .sort((a, b) => a.order > b.order ? 1 : -1);
+//     datam = datam.slice(0, 1);
+//  console.log(datam[0].post.isCompleted);
+//  console.log(datam[0].post.isCompleted===false);
  
-    return datam;
-  }
+//     return datam;
+//   }
 
-  nextTask =  () => {
-     this.setState({ data: this.getData() });
-     console.log(this.state.data);
-  };
+  // nextTask =  () => {
+  //    this.setState({ data: this.getData() });
+  //    console.log(this.state.data);
+  // };
 
   currentTaskStatus = () => {
     return this.state.orgData[0].post.isCompleted;
@@ -164,8 +164,8 @@ datam = lodash.filter(datam,(d)=>{ return d.post.isCompleted ===false ; });
     console.log("rotunda");
   
 
-    // const data = this.state?.data.filter(
-    //   (d) => d?.name?.toLowerCase().indexOf(this.state.filter) != -1).slice(0,1);
+    const data = this.state?.data.filter(
+      (d) => d?.name?.toLowerCase().indexOf(this.state.filter) != -1).slice(0,1);
 
     //   <Header
     //   {...this.state}
@@ -181,9 +181,9 @@ datam = lodash.filter(datam,(d)=>{ return d.post.isCompleted ===false ; });
       return <div className="spinner">Loading. Please wait...</div>;
     } else {
        
-      if (this.getData().length==0)
+      if (data.length==0)
       {
-      return  (<div className="spinner"><Text isTruncated={true}>Congratulations you have completed the tasks.<StarFilled /></Text></div>);
+      return  (<div className="spinner"><Text isTruncated={true}>Congratulations you have completed the tasks. If you have just registered please log off and login to see your missions.<StarFilled /></Text></div>);
       }
       else {
  return( 
@@ -193,7 +193,7 @@ datam = lodash.filter(datam,(d)=>{ return d.post.isCompleted ===false ; });
           <Grid
             className="grid"
             // Arbitrary data, should contain keys, possibly heights, etc.
-            data={this.state.data}
+            data={data}
             // Key accessor, instructs grid on how to fet individual keys from the data set
             keys={(d) => d.name}
             // Can be a fixed value or an individual data accessor
