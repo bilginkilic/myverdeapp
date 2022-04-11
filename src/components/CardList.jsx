@@ -53,7 +53,7 @@ const Cell = ({
 
           <p>{description}</p>
           <div
-            className="divx"
+            className="divx" 
             onClick={() => {
               
                 /* Models in DataStore are immutable. To update a record you must use the copyOf function
@@ -70,9 +70,9 @@ const Cell = ({
                 alert("Completed!");
                
              // toggle();
-            }}
-          >
-            { !altdata.post.isCompleted && altdata.post.isCompleted !=='true' ? "complete" : "completed | Come tomorrow to have your next task"}
+            }} >
+            Complete
+          
           </div>
         </Slug>
       </div>
@@ -109,8 +109,9 @@ class CardList extends Component {
   completeTask = (id) => {
     let obj = [...this.state.orgData];
     obj[id].isCompleted = true;
-    this.setState({ orgData: obj });
-    this.nextTask(obj);
+    this.setState({ orgData: obj,data: obj });
+ 
+    //this.nextTask(obj);
     // this.shuffle();
     //this.setState((state) => ({ data:  state.data }));
   };
