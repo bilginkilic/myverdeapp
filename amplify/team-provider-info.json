@@ -14,6 +14,12 @@
     "categories": {
       "auth": {
         "myverdeapp2d2acabf": {}
+      },
+      "storage": {
+        "myverdeappe69c48b8": {
+          "bucketName": "myverdeapp-storage-86136297",
+          "region": "eu-west-3"
+        }
       }
     }
   }
