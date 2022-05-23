@@ -28,7 +28,7 @@ function App({ signOut, user }) {
         <WelcomePage tokens={tokens} />
       </div>
       <span id="content1buttn"></span>
-      <div margin="50px">
+      <div  align="center" margin="50px">
        
         <Button    variation="link"
   size="small" onClick={signOut}>

@@ -24,8 +24,7 @@ class TakeChallenge extends Component {
   
 
   hadleButtonClickx=  ()=> {
-   
-     console.log("ses veri", this.props.key, this.state);
+    
   };
 
   hadleButtonClick =  ()=> {
@@ -43,7 +42,7 @@ class TakeChallenge extends Component {
         item.isCompleted = true;
       })
     );
-    console.log(this.state.post);
+    
   };
 
   // componentDidMount() {

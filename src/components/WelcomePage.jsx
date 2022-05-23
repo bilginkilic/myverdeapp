@@ -52,9 +52,9 @@ class WelcomePage extends Component {
       (c) => c.email === this.state.email //"blgnklc@gmail.com"
     );
 
-    if (listBlog.length > 0) {
-      this.setState({ email: this.state.email });
-      this.setState({
+    if (listBlog && listBlog.length > 0 && listBlog[0].title) {
+      this.setState({ email: this.state.email  ,
+ 
         blogTitle: listBlog[0].title,
 
         blogid: listBlog[0].id,
@@ -64,7 +64,7 @@ class WelcomePage extends Component {
   };
 
   addCardsToBlog = async () => {
-    console.log("addCardsToBlog");
+    
     const models = await DataStore.query(CardPost);
 
     for (let i = 0; i < models.length; i++) {
@@ -87,10 +87,10 @@ class WelcomePage extends Component {
   };
 
   takeChallenge = async () => {
-    console.log("takeChallenge");
+   
     await this.saveBlog();
-    this.setState({ hasBlog: true });
-    this.setState({ welcomeMessage: "You are in the challenge. Good Luck" });
+    this.setState({ hasBlog: true  ,
+      welcomeMessage: "You are in the challenge. btn" });
   };
 
   buttonClicked = async (item, index) => {
@@ -120,7 +120,7 @@ to apply updates to the item’s fields rather than mutating the instance direct
 
   componentDidMount() {
     const fetchUser = async () => {
-      console.log(1);
+ 
       Auth.currentUserInfo().then((result) => {
         if (result) {
           const emailx = result.attributes.email;
@@ -128,7 +128,7 @@ to apply updates to the item’s fields rather than mutating the instance direct
             email: emailx,
             isLoading: false,
           });
-          console.log("user yüklendi");
+          
           fetchUserBlog().then(() => {
             fetchPost();
           });
@@ -141,32 +141,31 @@ to apply updates to the item’s fields rather than mutating the instance direct
         (c) => c.email === this.state.email //"blgnklc@gmail.com"
       );
 
-      if (listBlog.length > 0) {
-        this.setState({ email: this.state.email });
-        this.setState({
+      if (listBlog && listBlog.length > 0 && listBlog[0].title) {
+        this.setState({ email: this.state.email ,
+       
           blogTitle: listBlog[0].title,
 
           blogid: listBlog[0].id,
-        });
-        console.log("blog yüklendi");
-        this.setState({ hasBlog: true });
-        this.setState({
-          welcomeMessage: "You are in the challenge. Good Luck",
+          hasBlog: true ,
+      
+          welcomeMessage: "You are in the challenge. loaded",
         });
       } else {
-        this.setState({ hasBlog: false });
-        this.setState({
+        this.setState({ hasBlog: false ,
+        
           welcomeMessage:
             "You do not have a challenge now. Take the challenge?",
         });
       }
+      console.log(this.state);
     };
 
     const fetchPost = async () => {
       const posts = (await DataStore.query(Post)).filter(
         (c) => c.blogID === this.state.blogid
       );
-      console.log(posts);
+  
       this.setState({ post: posts });
       //
       if (posts) {
@@ -191,12 +190,13 @@ to apply updates to the item’s fields rather than mutating the instance direct
       }
 
       this.setState({ isPostLoading: false });
-      console.log("post yüklendi");
+      console.log(this.state);
+      
     };
 
     fetchUser();
 
-    //console.log(this.state);
+    console.log(this.state);
   }
 
   componentWillUnmount() {}
@@ -204,17 +204,17 @@ to apply updates to the item’s fields rather than mutating the instance direct
   render() {
     return (
       <div  >
-        <div><Heading level={3}>Welcome {this.state.email}</Heading>  </div>
-        <div><Heading level={4}>{this.state.welcomeMessage}<StarTwoTone /></Heading>  </div>
+        <div align="center" ><Heading level={5}>Water Saving App</Heading>  </div>
+        <div align="center"><Text level={4}>{this.state.welcomeMessage}<StarTwoTone /></Text>  </div>
         {this.state.isLoading ? (
           <div>Loading challenge...</div>
         ) : !this.state.hasBlog ? (
-          <div>
+          <div align="center">
             <div>
             <Text isTruncated={true}> Please click the button to receive your tasks which will take 21
                 days.<StarOutlined /></Text>
                 <Text isTruncated={true}>
-              <img src="https://previews.dropbox.com/p/thumb/ABewn9DqGBai3eWwk1TdIXuPsfhgnaR3UST-syVuwFquLtt6JdU1QN3ozMHUearMNhPLsTF7Rv-R-TKdfa6dvrsa4ZaDONuLoTpTYbDwsLS8R-u2t7qTrSmMpHeiZYJhcodD2efusNyB2AeDO6Idi85kXZXPqxfp36dz8YDp-ktzR4rS90PEHCjeL5u9jZ59qRa03JzXDR1UhyPYYQhhD53SD6kI6-eP4gjiQyMax_qzlNH2E5lI6zyBX1laFFE1wtyxQaRboKruoSCjOI2hEkKR6zg5qVJzULeCL3bL5IXVl8g6KfwOyL8VAs4rCMKe9psYeIV6Dj7ea2AIahQGZpYUe-B_mlZzpeD-S1fCwzFlMCCkPVA9gHTRTL8dv15CxEk/p.jpeg" />
+              <img src="https://myverdeapp-storage-86136297.s3.eu-west-3.amazonaws.com/home.jpg" />
               </Text>
               <Button    variation="primary"
   size="large" onClick={this.takeChallenge}>
@@ -234,6 +234,7 @@ to apply updates to the item’s fields rather than mutating the instance direct
             )}
           </div>
         )}
+         <div align="center"><Text level={6}>Logged in user: {this.state.email}</Text>  </div>
       </div>
     );
   }

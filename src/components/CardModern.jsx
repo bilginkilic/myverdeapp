@@ -33,7 +33,7 @@ class CardModern extends Component {
             item.isCompleted = true;
           })
         );
-        console.log(this.state.post);
+ 
       };
     render() { 
         return (<Card style={{ width: '18rem' }}>

@@ -8,9 +8,10 @@ import data from "./data";
 import Header from "./Header";
 import { Grid, Slug, Fade } from "mauerwerk";
 import { DataStore } from "@aws-amplify/datastore";
-import { StarOutlined,StarTwoTone ,StarFilled} from "@ant-design/icons";
+import { StarOutlined, StarTwoTone, StarFilled } from "@ant-design/icons";
 import {
-  Card,IconStar,
+  Card,
+  IconStar,
   Image,
   View,
   Heading,
@@ -30,7 +31,7 @@ const Cell = ({
   maximized,
   altdata,
   completeTask,
-  currentTaskStatus
+  currentTaskStatus,
 }) => (
   <div
     className="cell"
@@ -53,26 +54,25 @@ const Cell = ({
 
           <p>{description}</p>
           <div
-            className="divx" 
+            className="divx"
             onClick={() => {
-              
-                /* Models in DataStore are immutable. To update a record you must use the copyOf function
+              /* Models in DataStore are immutable. To update a record you must use the copyOf function
              to apply updates to the item’s fields rather than mutating the instance directly */
-                console.log(altdata);
-                DataStore.save(
-                  Post.copyOf(altdata.post, (item) => {
-                    // Update the values on {item} variable to update DataStore entry
-                    item.isCompleted = true;
-                  })
-                );
-                completeTask(altdata.order - 1);
 
-                alert("Completed!");
-               
-             // toggle();
-            }} >
+              DataStore.save(
+                Post.copyOf(altdata.post, (item) => {
+                  // Update the values on {item} variable to update DataStore entry
+                  item.isCompleted = true;
+                })
+              );
+              completeTask(altdata.order - 1);
+
+              alert("Completed!");
+
+              // toggle();
+            }}
+          >
             Complete
-          
           </div>
         </Slug>
       </div>
@@ -98,19 +98,18 @@ class CardList extends Component {
     margin: 70,
     filter: "",
     height: true,
-    data: this.props.cardListData,//his.getData(this.props.cardListData),
+    data: this.props.cardListData, //his.getData(this.props.cardListData),
     orgData: this.props.cardListData,
     currentOderder: -1,
   };
   constructor(props) {
     super(props);
-    console.log(this.state.data);
   }
   completeTask = (id) => {
     let obj = [...this.state.orgData];
     obj[id].isCompleted = true;
-    this.setState({ orgData: obj,data: obj });
- 
+    this.setState({ orgData: obj, data: obj });
+
     //this.nextTask(obj);
     // this.shuffle();
     //this.setState((state) => ({ data:  state.data }));
@@ -131,40 +130,15 @@ class CardList extends Component {
   }
   handleStatusChange() {}
 
-//   getData(datax){
-//     let datam = datax
-//     if(datam === undefined){
-//        datam = this.state.orgData;
-//        console.log("ORG data")
-//     }
-   
-// datam = lodash.orderBy(datam,"order","asc");
-// datam = lodash.filter(datam,(d)=>{ return d.post.isCompleted ===false ; });
-
-//   //   datam = datam.filter((d) => d.post.isCompleted !== true)
-//   //  .sort((a, b) => a.order > b.order ? 1 : -1);
-//     datam = datam.slice(0, 1);
-//  console.log(datam[0].post.isCompleted);
-//  console.log(datam[0].post.isCompleted===false);
- 
-//     return datam;
-//   }
-
-  // nextTask =  () => {
-  //    this.setState({ data: this.getData() });
-  //    console.log(this.state.data);
-  // };
-
   currentTaskStatus = () => {
     return this.state.orgData[0].post.isCompleted;
-  }
+  };
 
   render() {
-    console.log("rotunda");
-  
-
-    const data = this.state?.data.filter((d) => d.post.isCompleted !== true)
-        .sort((a, b) => a.order > b.order ? 1 : -1).slice(0, 1);
+    const data = this.state?.data
+      .filter((d) => d.post.isCompleted !== true)
+      .sort((a, b) => (a.order > b.order ? 1 : -1))
+      .slice(0, 1);
 
     //   <Header
     //   {...this.state}
@@ -179,49 +153,55 @@ class CardList extends Component {
     if (!this.state.loaded) {
       return <div className="spinner">Loading. Please wait...</div>;
     } else {
-       
-      if (data.length==0)
-      {
-      return  (<div className="spinner"><Text isTruncated={true}>Congratulations you have completed the tasks. If you have just registered please log off and login to see your missions.<StarFilled /></Text></div>);
+      if (data.length == 0) {
+        return (
+          <div className="spinner">
+            <Text isTruncated={false}>
+              Congratulations you have completed the tasks. If you have just
+              registered please log off and login to see your missions.
+              {data.length}
+              <StarFilled />
+            </Text>
+          </div>
+        );
+      } else {
+        return (
+          <div className="main">
+            <Grid
+              className="grid"
+              // Arbitrary data, should contain keys, possibly heights, etc.
+              data={data}
+              // Key accessor, instructs grid on how to fet individual keys from the data set
+              keys={(d) => d.name}
+              // Can be a fixed value or an individual data accessor
+              heights={this.state.height ? (d) => d.height : 200}
+              // Number of columns
+              columns={this.state.columns}
+              // Space between elements
+              margin={this.state.margin}
+              // Removes the possibility to scroll away from a maximized element
+              lockScroll={false}
+              // Delay when active elements (blown up) are minimized again
+              closeDelay={400}
+            >
+              {(data, maximized, toggle) => (
+                <Cell
+                  {...data}
+                  maximized={maximized}
+                  toggle={toggle}
+                  altdata={data}
+                  completeTask={this.completeTask}
+                />
+              )}
+            </Grid>
+            <Text>
+              {" "}
+              When you complete your mission please come by tomorrow to have
+              your next mission.{" "}
+            </Text>
+          </div>
+        );
       }
-      else {
- return( 
-    
-
-        <div className="main">
-          <Grid
-            className="grid"
-            // Arbitrary data, should contain keys, possibly heights, etc.
-            data={data}
-            // Key accessor, instructs grid on how to fet individual keys from the data set
-            keys={(d) => d.name}
-            // Can be a fixed value or an individual data accessor
-            heights={this.state.height ? (d) => d.height : 200}
-            // Number of columns
-            columns={this.state.columns}
-            // Space between elements
-            margin={this.state.margin}
-            // Removes the possibility to scroll away from a maximized element
-            lockScroll={false}
-            // Delay when active elements (blown up) are minimized again
-            closeDelay={400}
-          >
-            {(data, maximized, toggle) => (
-              <Cell
-                {...data}
-                maximized={maximized}
-                toggle={toggle}
-                altdata={data}
-                completeTask={this.completeTask}
-                
-              />
-            )}
-          </Grid>
-          <Text> When you complete your mission please come by tomorrow to have your next mission.  </Text>
-         
-        </div>);
-      }
-      
     }
   }
 }
