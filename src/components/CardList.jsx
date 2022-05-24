@@ -71,6 +71,7 @@ const Cell = ({
               completeTask(altdata.order - 1);
 
               alert("Completed!");
+              window.location.reload();
 
               // toggle();
             }}
@@ -160,9 +161,9 @@ class CardList extends Component {
     } else {
       if (
         data &&
-        data.length > 0 &&
+        data.length == 0 &&
         dataAll &&
-        dataAll.length == 0
+        dataAll.length > 0
       ) {
         return (
           <div className="spinner" align="center">
@@ -171,6 +172,7 @@ class CardList extends Component {
               new badge!
               {data.length} days are completed successfully.
               <StarFilled />
+
             </Text>
             <img
               width="320px"
@@ -180,7 +182,7 @@ class CardList extends Component {
         );
       } else {
         return (
-          <div className="main">
+          <div className="main" align="center">
             <Grid
               className="grid"
               // Arbitrary data, should contain keys, possibly heights, etc.
@@ -208,9 +210,10 @@ class CardList extends Component {
                 />
               )}
             </Grid>
+
             <Text>
               {" "}
-              When you complete your mission please come by tomorrow to have
+              when you complete your mission please come by tomorrow to have
               your next mission.{" "}
             </Text>
           </div>
