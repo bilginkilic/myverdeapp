@@ -40,7 +40,7 @@ const Cell = ({
   >
     <Fade show={maximized} delay={maximized ? 400 : 0}>
       <div className="details">
-        <Slug delay={600}>
+        <Slug delay={600} >
           <div className="close">
             <div type="close" style={{ cursor: "pointer" }} onClick={toggle}>
               X{" "}
@@ -138,12 +138,12 @@ class CardList extends Component {
   };
 
   render() {
-    const dataNotCompleted = this.state?.data
+    const data = this.state?.data
       .filter((d) => d.post.isCompleted !== true)
       .sort((a, b) => (a.order > b.order ? 1 : -1))
       .slice(0, 1);
 
-    const data = this.state?.data;
+    const dataAll = this.state?.data;
 
     //   <Header
     //   {...this.state}
@@ -161,8 +161,8 @@ class CardList extends Component {
       if (
         data &&
         data.length > 0 &&
-        dataNotCompleted &&
-        dataNotCompleted.length == 0
+        dataAll &&
+        dataAll.length == 0
       ) {
         return (
           <div className="spinner" align="center">
