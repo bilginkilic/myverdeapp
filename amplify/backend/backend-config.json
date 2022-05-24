@@ -49,12 +49,5 @@
       }
     }
   },
-  "storage": {
-    "myverdeappe69c48b8": {
-      "service": "S3",
-      "serviceType": "imported",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": []
-    }
-  }
+  "storage": {}
 }
