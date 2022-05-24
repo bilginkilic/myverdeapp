@@ -1,14 +1,17 @@
+
 import React, { Component } from "react";
+import { StarOutlined,StarTwoTone ,StarFilled} from "@ant-design/icons";
 import { DataStore } from "@aws-amplify/datastore";
 import { Blog, Post, CardPost } from "../models";
 import { Auth } from "aws-amplify";
+import data from "./data";
 import { MyTask } from "../ui-components";
 import { Alert } from "@aws-amplify/ui-react";
 import TakeChallenge from "./TakeChallenge";
 import { Collection } from "@aws-amplify/ui-react";
-import { Carousel } from '@trendyol-js/react-carousel';
+import { Carousel } from "@trendyol-js/react-carousel";
 import {
-  Card,
+  Card,IconStar,
   Image,
   View,
   Heading,
@@ -18,8 +21,9 @@ import {
   Button,
 } from "@aws-amplify/ui-react";
 import CardModern from "./CardModern";
+import CardList from "./CardList";
 class WelcomePage extends Component {
-   state = {
+  state = {
     email: "",
     blogTitle: "",
     hasBlog: false,
@@ -29,14 +33,14 @@ class WelcomePage extends Component {
     tokens: null,
     blogid: "",
     post: [],
+    dataForCardList: [],
   };
   constructor(props) {
     super(props);
-    this.setState({tokens:props.tokens});
+    this.setState({ tokens: props.tokens });
   }
-  
 
-    saveBlog = async () => {
+  saveBlog = async () => {
     await DataStore.save(
       new Blog({
         name: "My first challenge",
@@ -48,9 +52,9 @@ class WelcomePage extends Component {
       (c) => c.email === this.state.email //"blgnklc@gmail.com"
     );
 
-    if (listBlog.length > 0) {
-      this.setState({ email: this.state.email });
-      this.setState({
+    if (listBlog && listBlog.length > 0 && listBlog[0].title) {
+      this.setState({ email: this.state.email  ,
+ 
         blogTitle: listBlog[0].title,
 
         blogid: listBlog[0].id,
@@ -59,8 +63,8 @@ class WelcomePage extends Component {
     this.addCardsToBlog();
   };
 
-    addCardsToBlog = async () => {
-    console.log("addCardsToBlog");
+  addCardsToBlog = async () => {
+    
     const models = await DataStore.query(CardPost);
 
     for (let i = 0; i < models.length; i++) {
@@ -82,27 +86,27 @@ class WelcomePage extends Component {
     this.setState({ post: posts });
   };
 
-    takeChallenge = async () => {
-    console.log("takeChallenge");
+  takeChallenge = async () => {
+   
     await this.saveBlog();
-    this.setState({ hasBlog: true });
-    this.setState({ welcomeMessage: "You are in the challenge. Good Luck" });
+    this.setState({ hasBlog: true  ,
+      welcomeMessage: "You are in the challenge. btn" });
   };
 
-    buttonClicked = async (item, index) => {
+  buttonClicked = async (item, index) => {
     await this.updatePost(item);
-     let obj2 = [...this.state.post];
+    let obj2 = [...this.state.post];
     for (const obj of obj2) {
       if (obj.id === index) {
         obj.isCompleted = true;
-    
+
         break;
       }
     }
     this.setState({ post: obj2 });
   };
 
-    updatePost = async (item) => {
+  updatePost = async (item) => {
     /* Models in DataStore are immutable. To update a record you must use the copyOf function
 to apply updates to the item’s fields rather than mutating the instance directly */
 
@@ -111,15 +115,12 @@ to apply updates to the item’s fields rather than mutating the instance direct
         // Update the values on {item} variable to update DataStore entry
         item.isCompleted = true;
       })
-      
-    );  
+    );
   };
-   
 
   componentDidMount() {
-   
     const fetchUser = async () => {
-      console.log(1);
+ 
       Auth.currentUserInfo().then((result) => {
         if (result) {
           const emailx = result.attributes.email;
@@ -127,6 +128,7 @@ to apply updates to the item’s fields rather than mutating the instance direct
             email: emailx,
             isLoading: false,
           });
+          
           fetchUserBlog().then(() => {
             fetchPost();
           });
@@ -139,84 +141,100 @@ to apply updates to the item’s fields rather than mutating the instance direct
         (c) => c.email === this.state.email //"blgnklc@gmail.com"
       );
 
-      if (listBlog.length > 0) {
-        this.setState({ email: this.state.email });
-        this.setState({
+      if (listBlog && listBlog.length > 0 && listBlog[0].title) {
+        this.setState({ email: this.state.email ,
+       
           blogTitle: listBlog[0].title,
 
           blogid: listBlog[0].id,
-        });
-        this.setState({ hasBlog: true });
-        this.setState({
-          welcomeMessage: "You are in the challenge. Good Luck",
+          hasBlog: true ,
+      
+          welcomeMessage: "You are in the challenge. loaded",
         });
       } else {
-        this.setState({ hasBlog: false });
-        this.setState({
+        this.setState({ hasBlog: false ,
+        
           welcomeMessage:
             "You do not have a challenge now. Take the challenge?",
         });
       }
+      console.log(this.state);
     };
 
     const fetchPost = async () => {
       const posts = (await DataStore.query(Post)).filter(
         (c) => c.blogID === this.state.blogid
       );
+  
       this.setState({ post: posts });
+      //
+      if (posts) {
+        let newArray = [];
+      //  let postRaw = { ...posts };//bu obje olur
+   
+        let i = 0;
+        posts.forEach((d) => {
+          let newObj = {
+            name: d.title,
+            description: d.description,
+            image: d.image,
+            css: data[i % 14].css, //  d.css,//because there are 14 variants in data css array
+            height: 200,
+            order:(i+1),
+            post:d
+          };
+          newArray.push(newObj);
+          i++;
+        });
+        this.setState({ dataForCardList: newArray });
+      }
+
       this.setState({ isPostLoading: false });
       console.log(this.state);
+      
     };
 
     fetchUser();
 
-    //console.log(this.state);
+    console.log(this.state);
   }
 
   componentWillUnmount() {}
 
   render() {
-  
     return (
-      <div>
-        <div>Welcome {this.state.email}</div>
-        <div>{this.state.welcomeMessage}</div>
+      <div  >
+        <div align="center" ><Heading level={5}>Water Saving App</Heading>  </div>
+        <div align="center"><Text level={4}>{this.state.welcomeMessage}<StarTwoTone /></Text>  </div>
         {this.state.isLoading ? (
-          <div>Loading...</div>
+          <div>Loading challenge...</div>
         ) : !this.state.hasBlog ? (
-          <div>
+          <div align="center">
             <div>
-              <h1>Take challenge</h1>
-              <img src="https://myverdeapp-storage-87d83883142712-staging.s3.eu-west-3.amazonaws.com/deniz1.jpg" />
-              <p>
-                Please click the button to receive your tasks which will take 21
-                days.
-              </p>
-              <button onClick={this.takeChallenge}>Take challenge</button>
+            <Text isTruncated={true}> Please click the button to receive your tasks which will take 21
+                days.<StarOutlined /></Text>
+                <Text isTruncated={true}>
+              <img src="https://myverdeapp-storage-86136297.s3.eu-west-3.amazonaws.com/home.jpg" />
+              </Text>
+              <Button    variation="primary"
+  size="large" onClick={this.takeChallenge}>
+         Take challenge
+          </Button>
+
+         
             </div>
           </div>
         ) : (
           <div>
-            {!this.state.isPostLoading ? (
-              
-              <Carousel show={3.5} slide={3} swiping={true}>
-               {   this.state?.post?.map((item, index) => 
-             
-            // <TakeChallenge key={index}  post={item} />
-             <CardModern  key={index}  post={item} />
-             )
-            }
- 
-             </Carousel>
-                  
-                   
-                 
-      
+            
+            {!this.state.isPostLoading  ? (
+              <CardList cardListData={this.state.dataForCardList} />
             ) : (
-              <div>loading</div>
+              <div>loading welcomes card</div>
             )}
           </div>
         )}
+         <div align="center"><Text level={6}>Logged in user: {this.state.email}</Text>  </div>
       </div>
     );
   }

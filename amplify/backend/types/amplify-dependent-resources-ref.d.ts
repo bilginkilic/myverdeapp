@@ -16,11 +16,5 @@ export type AmplifyDependentResourcesAttributes = {
             "AppClientIDWeb": "string",
             "AppClientID": "string"
         }
-    },
-    "storage": {
-        "s3myverdeappstorage87d83883": {
-            "BucketName": "string",
-            "Region": "string"
-        }
     }
 }

@@ -24,8 +24,7 @@
     height: 100%;
     overflow: hidden;
     color: #777777;
-    text-transform: uppercase;
-    display: flex;
+    text-transform: uppercase;display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0px 10px 60px -10px rgba(0, 0, 0, 0.2);
@@ -82,16 +81,16 @@
     background: #ffffffa0;
     color: white;
     padding: 40px;
-    font-weight: 100;
-    display: flex;
+    font-weight: 50;
+    display:block;
     flex-direction: column;
     justify-content: flex-end;
   }
   
   .details h1 {
     color: #ca6a9a;
-    font-size: 36px;
-    line-height: 36px;
+    font-size: 18px;
+    line-height: 18px;
     font-weight: 600;
     margin: 0;
     padding: 0;
@@ -100,10 +99,10 @@
   
   .details p {
     color: thistle;
-    font-size: 26px;
-    line-height: 26px;
+    font-size: 11px;
+    line-height: 12px;
     margin: 0;
-    padding-top: 15px;
+    padding-top: 10px;
   }
   
   .circle {
@@ -166,3 +165,8 @@
     box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.6);
   }
   
+
+  .contentmain {
+    max-width: 500px;
+    margin: auto;
+  }

@@ -50,8 +50,9 @@
     }
   },
   "storage": {
-    "s3myverdeappstorage87d83883": {
+    "myverdeappe69c48b8": {
       "service": "S3",
+      "serviceType": "imported",
       "providerPlugin": "awscloudformation",
       "dependsOn": []
     }
