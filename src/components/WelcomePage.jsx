@@ -41,6 +41,7 @@ class WelcomePage extends Component {
   }
 
   saveBlog = async () => {
+    console.log(this.state);
     await DataStore.save(
       new Blog({
         name: "My first challenge",
@@ -51,16 +52,16 @@ class WelcomePage extends Component {
     const listBlog = (await DataStore.query(Blog)).filter(
       (c) => c.email === this.state.email //"blgnklc@gmail.com"
     );
-
-    if (listBlog && listBlog.length > 0 && listBlog[0].title) {
+  console.log(listBlog)
+    if (listBlog && listBlog.length > 0 && listBlog[0].name) {
       this.setState({ email: this.state.email  ,
  
-        blogTitle: listBlog[0].title,
+        blogTitle: listBlog[0].name,
 
         blogid: listBlog[0].id,
       });
     }
-    this.addCardsToBlog();
+    //this.addCardsToBlog();
   };
 
   addCardsToBlog = async () => {
@@ -86,9 +87,13 @@ class WelcomePage extends Component {
     this.setState({ post: posts });
   };
 
-  takeChallenge = async () => {
+  takeChallenge =   () => {
    
-    await this.saveBlog();
+    this.saveBlog()
+    .then(()=>{
+      this.addCardsToBlog();
+    })
+    
     this.setState({ hasBlog: true  ,
       welcomeMessage: "You are in the challenge. btn" });
   };
@@ -141,10 +146,10 @@ to apply updates to the item’s fields rather than mutating the instance direct
         (c) => c.email === this.state.email //"blgnklc@gmail.com"
       );
 
-      if (listBlog && listBlog.length > 0 && listBlog[0].title) {
+      if (listBlog && listBlog.length > 0 && listBlog[0].name) {
         this.setState({ email: this.state.email ,
        
-          blogTitle: listBlog[0].title,
+          blogTitle: listBlog[0].name,
 
           blogid: listBlog[0].id,
           hasBlog: true ,
@@ -234,7 +239,7 @@ to apply updates to the item’s fields rather than mutating the instance direct
             )}
           </div>
         )}
-         <div align="center"><Text level={6}>Logged in user: {this.state.email}</Text>  </div>
+         <div align="center"><Text level={6}>logged in user: {this.state.email}</Text>  </div>
       </div>
     );
   }
