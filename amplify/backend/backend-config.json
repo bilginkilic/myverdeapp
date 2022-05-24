@@ -49,11 +49,5 @@
       }
     }
   },
-  "storage": {
-    "s3myverdeappstorage87d83883": {
-      "service": "S3",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": []
-    }
-  }
+  "storage": {}
 }

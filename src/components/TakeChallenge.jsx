@@ -19,24 +19,12 @@ class TakeChallenge extends Component {
     post: this.props.post
   };
    
-  // constructor(props) {
-  //   super(props);
-  //    this.setState({
+  
 
-  //   post:props?.post,
-  //   isCompleted: props.post?.isCompleted,
-  //   key:props?.key
-  // });
-
-  // hadleButtonClick = () => {
-  //      this.setState({isCompleted:true});
-  //       console.log("ses veri",this.props.keyx ,this.props.post.isCompleted);
-
-  // }
+  
 
   hadleButtonClickx=  ()=> {
-   
-     console.log("ses veri", this.props.key, this.state);
+    
   };
 
   hadleButtonClick =  ()=> {
@@ -54,7 +42,7 @@ class TakeChallenge extends Component {
         item.isCompleted = true;
       })
     );
-    console.log(this.state.post);
+    
   };
 
   // componentDidMount() {

@@ -14,6 +14,96 @@
     "categories": {
       "auth": {
         "myverdeapp2d2acabf": {}
+      },
+      "storage": {
+        "myverdeappe69c48b8": {
+          "bucketName": "myverdeapp-storage-86136297",
+          "region": "eu-west-3"
+        },
+        "Blogqo2m4l7iijealkz5n6oglwsbbmstaging": {
+          "tableName": "Blog-qo2m4l7iijealkz5n6oglwsbbm-staging",
+          "region": "eu-west-3",
+          "arn": "arn:aws:dynamodb:eu-west-3:398012631463:table/Blog-qo2m4l7iijealkz5n6oglwsbbm-staging",
+          "streamArn": "arn:aws:dynamodb:eu-west-3:398012631463:table/Blog-qo2m4l7iijealkz5n6oglwsbbm-staging/stream/2022-03-28T14:29:38.162",
+          "partitionKeyName": "id",
+          "partitionKeyType": "S"
+        },
+        "CardPostqo2m4l7iijealkz5n6oglwsbbmstaging": {
+          "tableName": "CardPost-qo2m4l7iijealkz5n6oglwsbbm-staging",
+          "region": "eu-west-3",
+          "arn": "arn:aws:dynamodb:eu-west-3:398012631463:table/CardPost-qo2m4l7iijealkz5n6oglwsbbm-staging",
+          "streamArn": "arn:aws:dynamodb:eu-west-3:398012631463:table/CardPost-qo2m4l7iijealkz5n6oglwsbbm-staging/stream/2022-03-31T18:57:59.072",
+          "partitionKeyName": "id",
+          "partitionKeyType": "S"
+        },
+        "AmplifyDataStoreqo2m4l7iijealkz5n6oglwsbbmstaging": {
+          "tableName": "AmplifyDataStore-qo2m4l7iijealkz5n6oglwsbbm-staging",
+          "region": "eu-west-3",
+          "arn": "arn:aws:dynamodb:eu-west-3:398012631463:table/AmplifyDataStore-qo2m4l7iijealkz5n6oglwsbbm-staging",
+          "streamArn": "arn:aws:dynamodb:eu-west-3:398012631463:table/AmplifyDataStore-qo2m4l7iijealkz5n6oglwsbbm-staging/stream/2022-03-28T14:28:26.696",
+          "partitionKeyName": "ds_pk",
+          "partitionKeyType": "S",
+          "sortKeyName": "ds_sk",
+          "sortKeyType": "S"
+        },
+        "Commentqo2m4l7iijealkz5n6oglwsbbmstaging": {
+          "tableName": "Comment-qo2m4l7iijealkz5n6oglwsbbm-staging",
+          "region": "eu-west-3",
+          "arn": "arn:aws:dynamodb:eu-west-3:398012631463:table/Comment-qo2m4l7iijealkz5n6oglwsbbm-staging",
+          "streamArn": "arn:aws:dynamodb:eu-west-3:398012631463:table/Comment-qo2m4l7iijealkz5n6oglwsbbm-staging/stream/2022-03-28T14:29:39.206",
+          "partitionKeyName": "id",
+          "partitionKeyType": "S"
+        },
+        "Postqo2m4l7iijealkz5n6oglwsbbmstaging": {
+          "tableName": "Post-qo2m4l7iijealkz5n6oglwsbbm-staging",
+          "region": "eu-west-3",
+          "arn": "arn:aws:dynamodb:eu-west-3:398012631463:table/Post-qo2m4l7iijealkz5n6oglwsbbm-staging",
+          "streamArn": "arn:aws:dynamodb:eu-west-3:398012631463:table/Post-qo2m4l7iijealkz5n6oglwsbbm-staging/stream/2022-03-28T14:29:38.370",
+          "partitionKeyName": "id",
+          "partitionKeyType": "S"
+        },
+        "Postqgwsogwg2ben3keb5ptgsjpdhyprod": {
+          "tableName": "Post-qgwsogwg2ben3keb5ptgsjpdhy-prod",
+          "region": "eu-west-3",
+          "arn": "arn:aws:dynamodb:eu-west-3:398012631463:table/Post-qgwsogwg2ben3keb5ptgsjpdhy-prod",
+          "streamArn": "arn:aws:dynamodb:eu-west-3:398012631463:table/Post-qgwsogwg2ben3keb5ptgsjpdhy-prod/stream/2022-03-30T09:38:07.308",
+          "partitionKeyName": "id",
+          "partitionKeyType": "S"
+        },
+        "Blogqgwsogwg2ben3keb5ptgsjpdhyprod": {
+          "tableName": "Blog-qgwsogwg2ben3keb5ptgsjpdhy-prod",
+          "region": "eu-west-3",
+          "arn": "arn:aws:dynamodb:eu-west-3:398012631463:table/Blog-qgwsogwg2ben3keb5ptgsjpdhy-prod",
+          "streamArn": "arn:aws:dynamodb:eu-west-3:398012631463:table/Blog-qgwsogwg2ben3keb5ptgsjpdhy-prod/stream/2022-03-30T09:38:06.104",
+          "partitionKeyName": "id",
+          "partitionKeyType": "S"
+        },
+        "AmplifyDataStoreqgwsogwg2ben3keb5ptgsjpdhyprod": {
+          "tableName": "AmplifyDataStore-qgwsogwg2ben3keb5ptgsjpdhy-prod",
+          "region": "eu-west-3",
+          "arn": "arn:aws:dynamodb:eu-west-3:398012631463:table/AmplifyDataStore-qgwsogwg2ben3keb5ptgsjpdhy-prod",
+          "streamArn": "arn:aws:dynamodb:eu-west-3:398012631463:table/AmplifyDataStore-qgwsogwg2ben3keb5ptgsjpdhy-prod/stream/2022-03-30T09:36:52.296",
+          "partitionKeyName": "ds_pk",
+          "partitionKeyType": "S",
+          "sortKeyName": "ds_sk",
+          "sortKeyType": "S"
+        },
+        "CardPostqgwsogwg2ben3keb5ptgsjpdhyprod": {
+          "tableName": "CardPost-qgwsogwg2ben3keb5ptgsjpdhy-prod",
+          "region": "eu-west-3",
+          "arn": "arn:aws:dynamodb:eu-west-3:398012631463:table/CardPost-qgwsogwg2ben3keb5ptgsjpdhy-prod",
+          "streamArn": "arn:aws:dynamodb:eu-west-3:398012631463:table/CardPost-qgwsogwg2ben3keb5ptgsjpdhy-prod/stream/2022-04-01T06:44:12.831",
+          "partitionKeyName": "id",
+          "partitionKeyType": "S"
+        },
+        "Commentqgwsogwg2ben3keb5ptgsjpdhyprod": {
+          "tableName": "Comment-qgwsogwg2ben3keb5ptgsjpdhy-prod",
+          "region": "eu-west-3",
+          "arn": "arn:aws:dynamodb:eu-west-3:398012631463:table/Comment-qgwsogwg2ben3keb5ptgsjpdhy-prod",
+          "streamArn": "arn:aws:dynamodb:eu-west-3:398012631463:table/Comment-qgwsogwg2ben3keb5ptgsjpdhy-prod/stream/2022-03-30T09:38:06.347",
+          "partitionKeyName": "id",
+          "partitionKeyType": "S"
+        }
       }
     }
   }
