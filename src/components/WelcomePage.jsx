@@ -93,6 +93,9 @@ class WelcomePage extends Component {
     .then(()=>{
       this.addCardsToBlog();
     })
+    .then(()=>{
+      window.location.reload();
+    });
     
     this.setState({ hasBlog: true  ,
       welcomeMessage: "You are in the challenge. btn" });
