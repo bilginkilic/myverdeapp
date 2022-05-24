@@ -168,9 +168,9 @@ class CardList extends Component {
         return (
           <div className="spinner" align="center">
             <Text isTruncated={false}>
-              Congratulations you have completed the tasks. You have just get a
-              new badge!
-              {data.length} days are completed successfully.
+              Congratulations you have completed the tasks. 
+              You have just get a new badge!
+              {dataAll.length} days are completed successfully.
               <StarFilled />
 
             </Text>

@@ -98,7 +98,7 @@ class WelcomePage extends Component {
     });
     
     this.setState({ hasBlog: true  ,
-      welcomeMessage: "You are in the challenge. btn" });
+      welcomeMessage: "Success! First day of the mission." });
   };
 
   buttonClicked = async (item, index) => {
@@ -157,7 +157,7 @@ to apply updates to the item’s fields rather than mutating the instance direct
           blogid: listBlog[0].id,
           hasBlog: true ,
       
-          welcomeMessage: "You are in the challenge. loaded",
+          welcomeMessage: "%th day of the mission.",
         });
       } else {
         this.setState({ hasBlog: false ,
