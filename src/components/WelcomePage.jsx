@@ -186,15 +186,16 @@ to apply updates to the item’s fields rather than mutating the instance direct
 
         let i = 0;
         posts.forEach((d) => {
+          console.log("merge",d);
           let newObj = {
-            name: d.title,
+            name:     d.title,
             description: d.description,
             image: d.image,
-            css: data[i % 14].css, //  d.css,//because there are 14 variants in data css array
+            css: data[4].css, //  d.css,//because there are 14 variants in data css array
             height: 200,
-            order:d.sequence+1 ,// i + 1,
+            order:  d?.sequence ,// i + 1,
             post: d
-            //sequence:d.sequence+1,
+             
           };
           newArray.push(newObj);
           i++;
