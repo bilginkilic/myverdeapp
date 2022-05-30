@@ -50,6 +50,7 @@ export declare class Post {
   readonly description?: string | null;
   readonly image?: string | null;
   readonly isCompleted?: boolean | null;
+  readonly sequence?: number | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Post, PostMetaData>);

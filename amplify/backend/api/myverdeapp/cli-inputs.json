@@ -3,7 +3,7 @@
   "serviceConfiguration": {
     "apiName": "myverdeapp",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/tmp/amplify-46f95a77-932c-46b1-9835-139c01c46558/amplify/backend/api/myverdeapp/schema.graphql",
+    "gqlSchemaPath": "/tmp/amplify-906c4d9f-d223-485e-9caa-560c2dc2078d/amplify/backend/api/myverdeapp/schema.graphql",
     "defaultAuthType": {
       "mode": "API_KEY",
       "keyDescription": "api key description",

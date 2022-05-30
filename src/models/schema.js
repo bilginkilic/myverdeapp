@@ -212,6 +212,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "sequence": {
+                    "name": "sequence",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -341,5 +348,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "83040b3eab5fe503ce389d86b247f0f9"
+    "version": "0372cf38752862d74c3c094dc78fac8a"
 };

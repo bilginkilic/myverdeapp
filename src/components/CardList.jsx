@@ -89,8 +89,7 @@ const Cell = ({
       delay={maximized ? 0 : 400}
     >
       <div className="default">
-        {" "}
-        {altdata.order} No. Mission {name}
+         {name}
       </div>
     </Fade>
   </div>
@@ -143,7 +142,7 @@ class CardList extends Component {
       .filter((d) => d.post.isCompleted !== true)
       .sort((a, b) => (a.order > b.order ? 1 : -1))
       .slice(0, 1);
-
+ console.log("OK",data);
     const dataAll = this.state?.data;
 
     //   <Header
@@ -183,6 +182,9 @@ class CardList extends Component {
       } else {
         return (
           <div className="main" align="center">
+              
+             <h1>Mission Day {data.order} </h1> 
+            
             <Grid
               className="grid"
               // Arbitrary data, should contain keys, possibly heights, etc.
