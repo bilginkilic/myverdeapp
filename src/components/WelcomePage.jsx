@@ -89,13 +89,20 @@ class WelcomePage extends Component {
     this.setState({ post: posts });
   };
 
+  sleep = (milliseconds) => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
+
   takeChallenge = () => {
     this.saveBlog()
       .then(() => {
         this.addCardsToBlog();
       })
       .then(() => {
-        // window.location.reload();
+        this.sleep(3000).then(r => {
+            window.location.reload();
+          })
+        //
       });
 
     this.setState({
