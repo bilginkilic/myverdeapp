@@ -46,10 +46,10 @@ const Cell = ({
               X{" "}
             </div>
           </div>
-          <h1>{name} </h1>
+          <div><h1>{name} </h1></div>
           <div class="float-container">
             <div class="float-child">
-              <img width="80%" src={altdata.image} />
+              <img width="90%"   src={altdata.image} />
             </div>
             <div class="float-child">
               <p>{description}</p>

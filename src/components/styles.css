@@ -29,8 +29,8 @@
     justify-content: center;
     box-shadow: 0px 10px 60px -10px rgba(0, 0, 0, 0.2);
     transition: box-shadow 0.5s;
-    font-size: 10px;
-    line-height: 10px;
+    font-size: 14px;
+    line-height: 14px;
   }
   
   .default {
@@ -98,7 +98,7 @@
   }
   
   .details p {
-    color: #ed20a2;
+    color: #080808;
     font-size: 12px;
     line-height: 12px;
     margin: 0;
