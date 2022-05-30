@@ -40,19 +40,22 @@ const Cell = ({
   >
     <Fade show={maximized} delay={maximized ? 400 : 0}>
       <div className="details">
-        <Slug delay={600}>
+        <Slug delay={600} >
           <div className="close">
             <div type="close" style={{ cursor: "pointer" }} onClick={toggle}>
               X{" "}
             </div>
           </div>
           <h1>{name} </h1>
-          <img
-            width="30%"
-            src="https://image.shutterstock.com/image-vector/happy-blue-bird-cartoon-flying-600w-437415406.jpg"
-          />
+          <div class="float-container">
+            <div class="float-child">
+              <img width="80%" src={altdata.image} />
+            </div>
+            <div class="float-child">
+              <p>{description}</p>
+            </div>
+          </div>
 
-          <p>{description}</p>
           <div
             className="divx"
             onClick={() => {
@@ -68,6 +71,7 @@ const Cell = ({
               completeTask(altdata.order - 1);
 
               alert("Completed!");
+              window.location.reload();
 
               // toggle();
             }}
@@ -85,8 +89,7 @@ const Cell = ({
       delay={maximized ? 0 : 400}
     >
       <div className="default">
-        {" "}
-        {altdata.order} No. Mission {name}
+         {name}
       </div>
     </Fade>
   </div>
@@ -139,6 +142,8 @@ class CardList extends Component {
       .filter((d) => d.post.isCompleted !== true)
       .sort((a, b) => (a.order > b.order ? 1 : -1))
       .slice(0, 1);
+ console.log("OK",data);
+    const dataAll = this.state?.data;
 
     //   <Header
     //   {...this.state}
@@ -153,20 +158,33 @@ class CardList extends Component {
     if (!this.state.loaded) {
       return <div className="spinner">Loading. Please wait...</div>;
     } else {
-      if (data.length == 0) {
+      if (
+        data &&
+        data.length == 0 &&
+        dataAll &&
+        dataAll.length > 0
+      ) {
         return (
-          <div className="spinner">
+          <div className="spinner" align="center">
             <Text isTruncated={false}>
-              Congratulations you have completed the tasks. If you have just
-              registered please log off and login to see your missions.
-              {data.length}
+              Congratulations you have completed the tasks. 
+              You have just get a new badge!
+              {dataAll.length} days are completed successfully.
               <StarFilled />
+
             </Text>
+            <img
+              width="320px"
+              src="https://myverdeapp-storage-86136297.s3.eu-west-3.amazonaws.com/completed.png"
+            />
           </div>
         );
       } else {
         return (
-          <div className="main">
+          <div className="main" align="center">
+              
+             <h1>Mission Day {data.order} </h1> 
+            
             <Grid
               className="grid"
               // Arbitrary data, should contain keys, possibly heights, etc.
@@ -194,9 +212,10 @@ class CardList extends Component {
                 />
               )}
             </Grid>
+
             <Text>
               {" "}
-              When you complete your mission please come by tomorrow to have
+              when you complete your mission please come by tomorrow to have
               your next mission.{" "}
             </Text>
           </div>

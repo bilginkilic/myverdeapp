@@ -23,7 +23,7 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
-    color: #777777;
+    color: #b02af9;
     text-transform: uppercase;display: flex;
     align-items: center;
     justify-content: center;
@@ -88,7 +88,7 @@
   }
   
   .details h1 {
-    color: #ca6a9a;
+    color: #ed20a2;
     font-size: 18px;
     line-height: 18px;
     font-weight: 600;
@@ -98,11 +98,12 @@
   }
   
   .details p {
-    color: thistle;
-    font-size: 11px;
+    color: #ed20a2;
+    font-size: 12px;
     line-height: 12px;
     margin: 0;
     padding-top: 10px;
+    font-weight: bold;
   }
   
   .circle {
@@ -170,3 +171,15 @@
     max-width: 500px;
     margin: auto;
   }
+
+  .float-container {
+    border: 0px solid;
+    padding: 0px;
+}
+
+.float-child {
+    width: 50%;
+    float: left;
+    padding: 0px;
+    border: 0px 
+}  
