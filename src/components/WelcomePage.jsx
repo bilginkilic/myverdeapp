@@ -228,10 +228,10 @@ to apply updates to the item’s fields rather than mutating the instance direct
           <Heading level={5}>Water Saving App</Heading>{" "}
         </div>
         <div align="center">
-          <Text level={4}>
+          <Text level={1}>
             {this.state.welcomeMessage}
             <StarTwoTone />
-          </Text>{" "}
+          </Text> 
         </div>
         {this.state.isLoading ? (
           <div>Loading challenge...</div>

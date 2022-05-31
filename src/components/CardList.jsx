@@ -46,10 +46,10 @@ const Cell = ({
               X{" "}
             </div>
           </div>
-          <div><h1>{name} </h1></div>
+          <div align="left" ><h1>{name} </h1></div>
           <div class="float-container">
             <div class="float-child">
-              <img width="90%"   src={altdata.image} />
+              <img width="90%"  style={{marginTop: 5 + 'px'}} src={altdata.image} />
             </div>
             <div class="float-child">
               <p>{description}</p>
@@ -181,9 +181,9 @@ class CardList extends Component {
         );
       } else {
         return (
-          <div className="main" align="center">
+          <div className="main" >
               
-             <h1>Mission Day {data.order} </h1> 
+            <div align="center"> <h1>Mission Day {data?.sequence} </h1></div> 
             
             <Grid
               className="grid"
@@ -213,11 +213,9 @@ class CardList extends Component {
               )}
             </Grid>
 
-            <Text>
-              {" "}
-              when you complete your mission please come by tomorrow to have
-              your next mission.{" "}
-            </Text>
+            <div align="center">
+            <b>tomorrow you'll have your next mission.</b>   
+           </div>
           </div>
         );
       }
